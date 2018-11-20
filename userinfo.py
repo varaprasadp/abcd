@@ -40,4 +40,5 @@ def data():
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
+   con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
    app.run(debug = True, use_reloader = True)
