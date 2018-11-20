@@ -1,1 +1,2 @@
 web: python userinfo.py
+web: bundle exec gramener server -p $PORT
