@@ -3,9 +3,9 @@ import urllib.parse as urlparse
 import os
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 dbname = url.path[1:]
-user = url.username
+user = url.user
 password = url.password
-host = url.hostname
+host = url.host
 port = url.port
 
 con = psycopg2.connect(
