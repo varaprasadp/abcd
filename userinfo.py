@@ -47,4 +47,4 @@ def data():
 
 if __name__ == '__main__':
    connect()
-   app.run(debug = True)
+   app.run(debug = True, use_reloader = True)
