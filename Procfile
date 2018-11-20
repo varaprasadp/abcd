@@ -1,3 +1,2 @@
-web: gunicorn userinfo:app --log-file
-web: gunicorn gettingstarted.wsgi
+web: gunicorn userinfo:app --log-file=-
 worker: python3 myscript.py
