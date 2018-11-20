@@ -26,6 +26,8 @@ def add_data():
       except:
          msg = "error in insert operation"
       finally:
+         if con==True:
+            msg = "Record successfully added"
          return render_template("result.html",msg = msg)
          con.close()
 
