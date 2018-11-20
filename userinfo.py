@@ -19,7 +19,7 @@ def add_data():
          gender = request.form['gender']
          con=connect()
          cur = con.cursor()
-         cur.execute("INSERT INTO database(name,age,gender) VALUES (?,?,?);",(name,age,gender) )
+         cur.execute("""INSERT INTO database(name,age,gender) VALUES (%s,%s,%s);""",(name,age,gender) )
          con.commit()
          msg = "Record successfully added"
       except:
@@ -40,7 +40,10 @@ def data():
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
-   con=connect()
+   try:
+      con=connect()
+   except:
+      msg="failed"
    if con:
      msg="connection established"
    else:
