@@ -44,8 +44,6 @@ def data():
 
 if __name__ == '__main__':
    con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-   gunicorn_logger = logging.getLogger('gunicorn.error')
-   app.logger.addHandler(logging.StreamHandler(sys.stdout))
-   app.logger.setLevel(logging.ERROR)
+   con.create_all()
    app.run(debug = True, use_reloader = True)
    
