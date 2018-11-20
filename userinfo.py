@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for
 from connection import connect
-
+import psychopg2
+import psychopg2.extras
 app = Flask(__name__)
 
 @app.route('/')
