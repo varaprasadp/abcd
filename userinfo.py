@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, url_for
-import sqlite3 as sql
 from connection import connect
 
 app = Flask(__name__)
@@ -17,12 +16,9 @@ def add_data():
          name = request.form['name']
          age = request.form['age']
          gender = request.form['gender']
-         
-         with sql.connect("d10vqpdr1b33rr") as con:
-            cur = con.cursor()
-            
-            cur.execute("INSERT INTO database(name,age,gender) VALUES (?,?,?)",(name,age,gender) )
-            
+         con=connect()
+         cur = con.cursor()
+         cur.execute("INSERT INTO database(name,age,gender) VALUES (?,?,?)",(name,age,gender) )
             con.commit()
             msg = "Record successfully added"
       except:
@@ -36,15 +32,16 @@ def add_data():
 
 @app.route('/data')
 def data():
-   con = sql.connect("d10vqpdr1b33rr")
-   con.row_factory = sql.Row
-   
-   cur = con.cursor()
+  con=connect()
+   cur = con.cursor(cursor_factory=psycopg2.extras.DictCursor)
    cur.execute("select * from database")
    
    rows = cur.fetchall();
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
-   connect()
+   con=connect()
+   cur=con.cursor()
+   cur.execute("CREATE TABLE IF NOT EXISTS database (name TEXT, age INTEGER, gender TEXT)")
    app.run(debug = True, use_reloader = True)
+   
