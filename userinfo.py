@@ -3,7 +3,10 @@ import urllib.parse as urlparse
 import os
 import psycopg2
 import psycopg2.extras
+import logging
+
 app = Flask(__name__)
+
 
 @app.route('/')
 
@@ -41,4 +44,7 @@ def data():
 
 if __name__ == '__main__':
    con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+   
    app.run(debug = True, use_reloader = True)
+   app.logger.addHandler(logging.StreamHandler(sys.stdout))
+   app.logger.setLevel(logging.ERROR)
