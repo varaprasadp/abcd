@@ -4,6 +4,7 @@ import os
 import psycopg2
 import psycopg2.extras
 import logging
+from config import Config
 
 app = Flask(__name__)
 
