@@ -1,3 +1,3 @@
 web: python userinfo.py
-web: bundle exec gramener server -p $PORT
-web: gunicorn gettingstarted.wsgi --log-file -
+web: exec gramener server -p $5432
+web: gunicorn gettingstarted.wsgi 
