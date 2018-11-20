@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, url_for
-from connection import connect
 import urllib.parse as urlparse
 import os
 import psycopg2
