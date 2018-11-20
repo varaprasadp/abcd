@@ -1,7 +1,11 @@
-import sqlite3
+import psychopg2
+import psychopg2.extras
 
 def connect():
-    conn = sqlite3.connect('ec2-54-235-156-60.compute-1.amazonaws.com')
-    conn.execute('CREATE TABLE IF NOT EXISTS database (name TEXT, age INTEGER, gender TEXT)')
-    conn.close()
-
+    conn = ('database=d10vqpdr1b33rr user=gwvshgjceutpcf password = 6405b053099f7ae42afde62c180253c7a86cb43d3e134eb5a3366aee4a4ee47d host= ec2-54-235-156-60.compute-1.amazonaws.com')
+    try:
+        return psychopg2.connect(conn)
+    except:
+        print('cannot connect')
+    
+ 
