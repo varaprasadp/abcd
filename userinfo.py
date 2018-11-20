@@ -13,23 +13,21 @@ def new_user():
 
 @app.route('/add_data',methods = ['POST', 'GET'])
 def add_data():
-   #if request.method == 'POST':
-   try:
-      name = request.form['name']
-      age = request.form['age']
-      gender = request.form['gender']
-      cur = con.cursor()
-      cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
-      cur.execute("""INSERT INTO database(name,age,gender) VALUES (%s,%s,%s);""",(name,age,gender) )
-      con.commit()
-      msg = "Record successfully added"
-   except:
-      con.rollback()
-      msg = "error in insert operation"
-
-   finally:
-      return render_template("result.html",msg = msg)
-      con.close()
+   if request.method == 'POST':
+      try:
+         name = request.form['name']
+         age = request.form['age']
+         gender = request.form['gender']
+         cur = con.cursor()
+         cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
+         cur.execute("""INSERT INTO database(name,age,gender) VALUES (%s,%s,%s);""",(name,age,gender) )
+         con.commit()
+         msg = "Record successfully added"
+      except:
+         msg = "error in insert operation"
+      finally:
+         return render_template("result.html",msg = msg)
+         con.close()
 
 
 @app.route('/data')
