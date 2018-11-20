@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 
-@app.route('/newuser')
+@app.route('/new_user')
 def new_user():
    return render_template('form.html')
 
