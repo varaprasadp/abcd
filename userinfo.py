@@ -4,6 +4,7 @@ import urllib.parse as urlparse
 import os
 import psycopg2
 import psycopg2.extras
+import myscript
 app = Flask(__name__)
 
 @app.route('/')
