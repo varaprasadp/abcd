@@ -19,7 +19,7 @@ def add_data():
          gender = request.form['gender']
          con=connect()
          cur = con.cursor()
-         cur.execute('"INSERT INTO database(name,age,gender) VALUES (?,?,?);",(name,age,gender)' )
+         cur.execute("INSERT INTO database(name,age,gender) VALUES (?,?,?)",(name,age,gender) )
          con.commit()
          msg = "Record successfully added"
       except:
