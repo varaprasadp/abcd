@@ -7,7 +7,9 @@ import logging
 
 app = Flask(__name__)
 
-
+app.config.from_object(Config)
+app.config['PSYCOPG2_TRACK_MODIFICATIONS'] = False
+con= psycopg2(app)
 @app.route('/')
 
 @app.route('/new_user')
@@ -43,7 +45,6 @@ def data():
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
-   con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
    con.create_all()
    app.run(debug = True, use_reloader = True)
    
