@@ -18,7 +18,7 @@ def add_data():
          age = request.form['age']
          gender = request.form['gender']
          
-         with sql.connect("database.db") as con:
+         with sql.connect("d10vqpdr1b33rr") as con:
             cur = con.cursor()
             
             cur.execute("INSERT INTO database(name,age,gender) VALUES (?,?,?)",(name,age,gender) )
