@@ -17,7 +17,6 @@ def add_data():
          name = request.form['name']
          age = request.form['age']
          gender = request.form['gender']
-         con=connect()
          cur = con.cursor()
          cur.execute("""INSERT INTO database(name,age,gender) VALUES (%s,%s,%s);""",(name,age,gender) )
          con.commit()
@@ -33,21 +32,12 @@ def add_data():
 
 @app.route('/data')
 def data():
-   con=connect()
    cur = con.cursor(cursor_factory=psycopg2.extras.DictCursor)
    cur.execute("select * from database;")
    rows = cur.fetchall();
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
-   try:
-      con=connect()
-   except:
-      msg="failed"
-   if con:
-     msg="connection established"
-   else:
-     msg="no connection"
    cur=con.cursor()
    cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
    app.run(debug = True, use_reloader = True,host="/localhost",port="5432")
