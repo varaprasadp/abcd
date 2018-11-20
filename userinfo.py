@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/newuser')
 def new_user():
-   return render_template('form.html')
+   return render_template('form.html',msg)
 
 @app.route('/add_data',methods = ['POST', 'GET'])
 def add_data():
@@ -42,9 +42,9 @@ def data():
 if __name__ == '__main__':
    con=connect()
    if con:
-      print("connection established")
+     msg="connection established"
    else:
-      print("no connection")
+     msg="no connection"
    cur=con.cursor()
    cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
    app.run(debug = True, use_reloader = True,host="/localhost",port="5432")
