@@ -19,9 +19,9 @@ def add_data():
          gender = request.form['gender']
          con=connect()
          cur = con.cursor()
-         cur.execute("INSERT INTO database(name,age,gender) VALUES (?,?,?)",(name,age,gender) )
-            con.commit()
-            msg = "Record successfully added"
+         cur.execute('"INSERT INTO database(name,age,gender) VALUES (?,?,?);",(name,age,gender)' )
+         con.commit()
+         msg = "Record successfully added"
       except:
          con.rollback()
          msg = "error in insert operation"
@@ -33,16 +33,15 @@ def add_data():
 
 @app.route('/data')
 def data():
-  con=connect()
+   con=connect()
    cur = con.cursor(cursor_factory=psycopg2.extras.DictCursor)
    cur.execute("select * from database")
-   
    rows = cur.fetchall();
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
    con=connect()
    cur=con.cursor()
-   cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20)")
+   cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
    app.run(debug = True, use_reloader = True,host="ec2-23-21-201-12.compute-1.amazonaws.com",port="5432")
    
