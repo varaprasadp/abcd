@@ -36,7 +36,7 @@ def add_data():
 
 @app.route('/data')
 def data():
-   con = sql.connect("database.db")
+   con = sql.connect("d10vqpdr1b33rr")
    con.row_factory = sql.Row
    
    cur = con.cursor()
