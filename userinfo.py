@@ -4,14 +4,13 @@ import urllib.parse as urlparse
 import os
 import psycopg2
 import psycopg2.extras
-import myscript
 app = Flask(__name__)
 
 @app.route('/')
 
 @app.route('/newuser')
 def new_user():
-   return render_template('form.html',msg)
+   return render_template('form.html')
 
 @app.route('/add_data',methods = ['POST', 'GET'])
 def add_data():
@@ -42,6 +41,5 @@ def data():
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
-   con=conn()
    app.run(debug = True, use_reloader = True")
    
