@@ -43,6 +43,6 @@ def data():
 if __name__ == '__main__':
    con=connect()
    cur=con.cursor()
-   cur.execute("CREATE TABLE IF NOT EXISTS database (name TEXT, age INTEGER, gender TEXT)")
+   cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20)")
    app.run(debug = True, use_reloader = True,host="ec2-23-21-201-12.compute-1.amazonaws.com",port="5432")
    
