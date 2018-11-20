@@ -1,6 +1,11 @@
-import psycopg2
-import urllib.parse as urlparse
 import os
+import psycopg2
+
+DATABASE_URL = os.environ['DATABASE_URL']
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+'''
+import urllib.parse as urlparse
 url = urlparse.urlparse(os.environ['DATABASE_URL'])
 dbname = url.path[1:]
 user = url.user
@@ -15,3 +20,4 @@ con = psycopg2.connect(
             host=host,
             port=port
             )
+'''
