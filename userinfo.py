@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, url_for
 from connection import connect
+import urllib.parse as urlparse
+import os
 import psycopg2
 import psycopg2.extras
 app = Flask(__name__)
@@ -38,12 +40,24 @@ def data():
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
-    conn = ("dbname='d4669f4pa3dkk8' user='gwvshgjceutpcf' password='6405b053099f7ae42afde62c180253c7a86cb43d3e134eb5a3366aee4a4ee47d' host='ec2-54-235-156-60.compute-1.amazonaws.com' port='5432'")
-    try:
-        return psycopg2.connect(conn)
-    except:
-        print('cannot connect')
+   url = urlparse.urlparse(os.environ['DATABASE_URL'])
+   dbname = url.path[1:]
+   user = url.username
+   password = url.password
+   host = url.hostname
+   port = url.port
+   con = psycopg2.connect(
+            dbname=dbname,
+            user=user,
+            password=password,
+            host=host,
+            port=port
+            )
    con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+   try:
+      cur=con.cursor()
+   except:
+      print('cannot connect')
    cur=con.cursor()
    cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
    app.run(debug = True, use_reloader = True,host="/localhost",port="5432")
