@@ -1,2 +1,2 @@
-web: gunicorn userinfo:app --log-file--
+web: gunicorn userinfo:app
 web: python3 myscript.py
