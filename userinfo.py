@@ -40,24 +40,6 @@ def data():
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
-   url = urlparse.urlparse(os.environ['DATABASE_URL'])
-   dbname = url.path[1:]
-   user = url.username
-   password = url.password
-   host = url.hostname
-   port = url.port
-   con = psycopg2.connect(
-            dbname=dbname,
-            user=user,
-            password=password,
-            host=host,
-            port=port
-            )
-   con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-   try:
-      cur=con.cursor()
-   except:
-      print('cannot connect')
    cur=con.cursor()
    cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
    app.run(debug = True, use_reloader = True,host="/localhost",port="5432")
