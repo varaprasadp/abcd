@@ -42,7 +42,9 @@ def data():
 if __name__ == '__main__':
    con=connect()
    if con:
-      print('connection established')
+      print("connection established")
+   else:
+      print("no connection")
    cur=con.cursor()
    cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
    app.run(debug = True, use_reloader = True,host="/localhost",port="5432")
