@@ -1,2 +1,2 @@
-web: gunicorn userinfo:app
-worker: python3 abcd/myscript.py
+web: gunicorn userinfo:app --log-file=-
+worker: python3 myscript.py
