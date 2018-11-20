@@ -35,7 +35,7 @@ def add_data():
 def data():
    con=connect()
    cur = con.cursor(cursor_factory=psycopg2.extras.DictCursor)
-   cur.execute("select * from database")
+   cur.execute("select * from database;")
    rows = cur.fetchall();
    return render_template("data.html",rows = rows)
 
@@ -43,5 +43,5 @@ if __name__ == '__main__':
    con=connect()
    cur=con.cursor()
    cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
-   app.run(debug = True, use_reloader = True,host="ec2-23-21-201-12.compute-1.amazonaws.com",port="5432")
+   app.run(debug = True, use_reloader = True,host="/localhost",port="5432")
    
