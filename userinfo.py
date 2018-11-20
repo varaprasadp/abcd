@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/new_user')
 def new_user():
    cur=con.cursor()
-   cur.execute("""CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20))""")
+   cur.execute("""CREATE TABLE database (name varchar(20), age integer, gender varchar(20))""")
    return render_template('form.html')
 
 @app.route('/add_data',methods = ['POST', 'GET'])
