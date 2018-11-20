@@ -7,6 +7,8 @@ import psycopg2.extras
 app = Flask(__name__)
 
 @app.route('/')
+cur=con.cursor()
+cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
 
 @app.route('/newuser')
 def new_user():
@@ -40,7 +42,5 @@ def data():
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
-   cur=con.cursor()
-   cur.execute("CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20));")
    app.run(debug = True, use_reloader = True,host="/localhost",port="5432")
    
