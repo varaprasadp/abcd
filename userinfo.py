@@ -9,6 +9,8 @@ app = Flask(__name__)
 
 @app.route('/new_user')
 def new_user():
+   cur=con.cursor()
+   cur.execute("""CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20))""")
    return render_template('form.html')
 
 @app.route('/add_data',methods = ['POST', 'GET'])
@@ -19,7 +21,6 @@ def add_data():
          age = request.form['age']
          gender = request.form['gender']
          cur = con.cursor()
-         cur.execute("""CREATE TABLE IF NOT EXISTS database (name varchar(20), age integer, gender varchar(20))""")
          cur.execute("""INSERT INTO database(name,age,gender) VALUES (%s,%s,%s);""",(name,age,gender) )
          con.commit()
          msg = "Record successfully added"
