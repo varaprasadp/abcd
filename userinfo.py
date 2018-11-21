@@ -18,9 +18,9 @@ def add_data():
          age = request.form['age']
          gender = request.form['gender']
          
-         with sql.connect("d10vqpdr1b33rr") as con:
+         with sql.connect("database") as con:
             cur = con.cursor()
-            
+            cur.execute("CREATE TABLE IF NOT EXISTS database(name VARCHAR(20),age INTEGER,gender VARCHAR(10);")
             cur.execute("INSERT INTO database(name,age,gender) VALUES (?,?,?)",(name,age,gender) )
             
             con.commit()
@@ -46,5 +46,5 @@ def data():
    return render_template("data.html",rows = rows)
 
 if __name__ == '__main__':
-   connect()
+   con=connect()
    app.run(debug = True, use_reloader = True)
